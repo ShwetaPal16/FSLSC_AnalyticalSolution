@@ -11,10 +11,9 @@ c=3*10^8; %speed of light
 fibre=1; %The view angle correction factor for the fibre which is later used to calculate the total incoming irradiance by integrating the spectro-angular reflected intensity due to a Lambertian
 
 %% Calculating the incoming irradiance by integrating the spectro-angular reflected intensity due to a Lambertian
-a=readtable('C:\Users\PalSS\OneDrive - University of Twente\Desktop\FSLSC Theory\realistic_system_model\Jelle - Direct experimental data, plots, and matlab code\lambertianreference2.xlsx') ; %Fetch the measured spectro-angular reflectance data
+a=load('Lambertian.mat');a=a.a;
 b(:,1) = linspace(510,800,151); %decide the step size
 b(:,2:9) = interp1( table2array(a(6:end,1)), table2array(a(6:end,2:9)), b(:,1) ); %adjust the step size
-% b(:,2:end) = (b(:,2:end)).*((b(:,1).*10^-9)./(6.63*10\^-34*3*10^8)) ; %convert to flux
  b(:,2:end) =  b(:,2:end).*fibre./P_r2; % correction for the non-ideality of the lambertian and the view angle of the fibre
 
 ThetaExp= table2array( a(5,2:9) ); %convert to matrix
@@ -34,7 +33,7 @@ InpSpecFlux(:,2)= InpSpec(:,2) ./(h.*c.*10^6./(InpSpec(:,1).*10^-9) ) ; %micro/s
 clear a b
 
 %% Load Luminophore Data
-a = load('C:\Users\PalSS\OneDrive - University of Twente\Desktop\FSLSC Theory\realistic_system_model\DyeForGreen100%AbsJelle099Lum.mat'); %Load measured dye emission
+load('Dye_Measured.mat')
 b = a.Final(:,[1 3]);
 LumInt = trapz(b(:,1),b(:,2)) ; %Check if dye measurements follow conservation laws. Gives out less photons than input.
 clear b
