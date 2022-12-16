@@ -153,7 +153,7 @@ plot(thetad,1.96*cos(theta),styles{3},'linewidth',2.5) %plot lambertian
 % plot(thetad,theta./theta)
 % plot(thetad,theta./theta*1.5)
 
-legend('Realistic','Ideal', '98% Lambertian')
+legend('Ideal', 'Realistic','98% Lambertian')
 xlabel('Emission Angle [deg]')
 ylabel('Emission [sr^{-1}]')
 set(gca,'fontsize',fontsize)
